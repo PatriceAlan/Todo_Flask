@@ -2,14 +2,14 @@ version: '3.9'
 
 services:
   db:
-    image: mariadb:latest
+    image: mysql:8.0.34
     restart: always
     ports:
       - "3306:3306"
     env_file:
       - .env  # Include the .env file here for the db service
     volumes:
-      - ./mariadb_data:/var/lib/mysql
+      - ./mysqldb_todo:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
@@ -20,4 +20,4 @@ services:
       PMA_ARBITRARY: 1
 
 volumes:
-  mariadb_data:
+  mysqldb_todo:

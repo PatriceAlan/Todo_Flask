@@ -9,7 +9,7 @@ load_dotenv()
 app = Flask(__name__, template_folder='app_package/templates')
 
 # Configure the database connection using environment variables
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ['MYSQL_USER']}:{os.environ['MYSQL_PASSWORD']}@{os.environ['MYSQL_HOST']}/{os.environ['MYSQL_DB']}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{os.environ['MYSQL_ROOT_PASSWORD']}@{os.environ['MYSQL_HOST']}/{os.environ['MYSQL_DATABASE']}"
 db = SQLAlchemy(app)
 
 # Create Models
@@ -35,7 +35,9 @@ def index():
 
     return render_template('index.html', **locals())
 
-# ... (rest of your Flask routes)
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     with app.app_context():  # Create an application context
